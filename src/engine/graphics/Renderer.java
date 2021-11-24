@@ -10,11 +10,11 @@ import org.joml.Vector4f;
 import static org.lwjgl.opengl.GL46C.*;
 
 public class Renderer {
-	private Shader shader;
-	private Shader shaderSkybox;
-	private Window window;
-	private PointLight pointLight;
-	
+	private final Shader shader;
+	private final Shader shaderSkybox;
+	private final Window window;
+	private final PointLight pointLight;
+
 	public Renderer(Window window, Shader shader, Shader shaderSkybox) {
 		this.window = window;
 		this.shader = shader;
@@ -26,7 +26,7 @@ public class Renderer {
 		PointLight.Attenuation att = new PointLight.Attenuation(0.0f, 0.0f, 1.0f);
 		pointLight.setAttenuation(att);
 	}
-	
+
 	public void renderMesh(GameObject gameObject, Camera camera, DirectionalLight directionalLight, Vector3f ambientLight, Fog fog) {
 		glBindVertexArray(gameObject.getMesh().getVAO());
 		glEnableVertexAttribArray(0);

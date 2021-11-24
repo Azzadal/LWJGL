@@ -7,12 +7,12 @@ import java.nio.IntBuffer;
 import static org.lwjgl.opengl.GL46C.*;
 
 public class Mesh {
-	private Vertex[] vertices;
-	private int[] indices;
-	private Texture texture;
+	private final Vertex[] vertices;
+	private final int[] indices;
+	private final Texture texture;
 	private int vao, pbo, ibo, cbo, tbo, vnbo;
 	private Material material;
-	
+
 	public Mesh(Vertex[] vertices, int[] indices, Texture texture) {
 		this.vertices = vertices;
 		this.indices = indices;
@@ -21,10 +21,10 @@ public class Mesh {
 
 	public void create() {
 		texture.create();
-		
+
 		vao = glCreateVertexArrays();
 		glBindVertexArray(vao);
-		
+
 		FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertices.length * 3);
 		float[] positionData = new float[vertices.length * 3];
 		for (int i = 0; i < vertices.length; i++) {
@@ -33,7 +33,7 @@ public class Mesh {
 			positionData[i * 3 + 2] = vertices[i].getPosition().z();
 		}
 		positionBuffer.put(positionData).flip();
-		
+
 		pbo = storeData(positionBuffer, 0, 3);
 
 		FloatBuffer vnormalBuffer = MemoryUtil.memAllocFloat(vertices.length * 3);
@@ -47,7 +47,6 @@ public class Mesh {
 
 		vnbo = storeData(vnormalBuffer, 3, 3);
 
-
 		FloatBuffer textureBuffer = MemoryUtil.memAllocFloat(vertices.length * 2);
 		float[] textureData = new float[vertices.length * 2];
 		for (int i = 0; i < vertices.length; i++) {
@@ -57,16 +56,16 @@ public class Mesh {
 		textureBuffer.put(textureData).flip();
 
 		tbo = storeData(textureBuffer, 2, 2);
-		
+
 		IntBuffer indicesBuffer = MemoryUtil.memAllocInt(indices.length);
 		indicesBuffer.put(indices).flip();
-		
+
 		ibo = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-	
+
 	private int storeData(FloatBuffer buffer, int index, int size) {
 		int bufferID = glCreateBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, bufferID);
@@ -75,7 +74,7 @@ public class Mesh {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		return bufferID;
 	}
-	
+
 	public void destroy() {
 		glDeleteBuffers(pbo);
 		glDeleteBuffers(cbo);
@@ -84,7 +83,7 @@ public class Mesh {
 		glDeleteBuffers(vnbo);
 
 		glDeleteVertexArrays(vao);
-		
+
 		texture.destroy();
 	}
 
@@ -115,11 +114,11 @@ public class Mesh {
 	public int getPBO() {
 		return pbo;
 	}
-	
+
 	public int getCBO() {
 		return cbo;
 	}
-	
+
 	public int getTBO() {
 		return tbo;
 	}
@@ -127,7 +126,7 @@ public class Mesh {
 	public int getIBO() {
 		return ibo;
 	}
-	
+
 	public Texture getTexture() {
 		return texture;
 	}
