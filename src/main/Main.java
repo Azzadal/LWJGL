@@ -20,28 +20,35 @@ public class Main implements Runnable {
 			"resources/models/6/airplane_v2_L2.123c71795678-4b63-46c4-b2c6-549c45f4c806/" +
 					"airplane_body_diffuse_v1_my.jpg");
 	private final Mesh barnModel = ModelLoader.loadModel(
-			"resources/models/saray/my/saray.obj", "resources/models/saray/my/cottage_diffuse.png");
+            "resources/models/saray/my/saray.obj", "resources/models/saray/my/cottage_diffuse.png");
+    private final Mesh platzModel = ModelLoader.loadModel(
+            "resources/models/1/94-format/Container.obj", "resources/models/1/44-container_textures/textures_container/Container_DiffuseMap.jpg");
 	private final Mesh houseModel = ModelLoader.loadModel(
 			"resources/models/2/45-cottage_free_other/Cottage_FREE.3DS",
 			"resources/models/2/82-textures_cottage_dirt/Cottage_Dirt/Cottage_Dirt_Base_Color.png");
 	private final Mesh skyBoxModel = ModelLoader.loadModel("resources/models/skybox/untitled.obj",
 			"resources/models/skybox/3.png");
 	private final Mesh dodecaedrModel = ModelLoader.loadModel("resources/models/dodecaedr/dod.obj",
-			"resources/models/dodecaedr/dod.jpg");
+			"resources/models/dodecaedr/5.jpg");
 	private final GameObject airplane = new GameObject(
 			new Vector3f(-97f, -460f, -3.3f),
 			new Vector3f(0, 0, 0),
 			new Vector3f(0.1f, 0.1f, 0.1f),
 			airplaneModel);
 	private final GameObject barn = new GameObject(
-			new Vector3f(30f, 10.5f, 7f),
+			new Vector3f(-70f, 50.5f, 35f),
 			new Vector3f(1.54f, -0.08f, 0),
-			new Vector3f(2f, 2f, 2f),
+			new Vector3f(3f, 3f, 3f),
 			barnModel);
+    private final GameObject platz = new GameObject(
+            new Vector3f(-110.6f, -100.5f, 15f),
+            new Vector3f(1.54f, -0.08f, 0),
+            new Vector3f(1f, .1f, .9f),
+            platzModel);
 	private final GameObject house = new GameObject(
-			new Vector3f(36.2f, -64.2f, 6.55f),
+			new Vector3f(-60f, -64.2f, 34.55f),
 			new Vector3f(1.57f, 0, 0),
-			new Vector3f(0.05f, 0.05f, 0.05f),
+			new Vector3f(0.1f, 0.1f, 0.1f),
 			houseModel);
 	private final GameObject skyBox = new GameObject(
 			new Vector3f(0, 0, 0),
@@ -51,7 +58,7 @@ public class Main implements Runnable {
 	private final GameObject dodecaedr = new GameObject(
 			new Vector3f(50, 50, 4),
 			new Vector3f(0,0,0),
-			new Vector3f(1f, 1f, 1f),
+			new Vector3f(4f, 4f, 4f),
 			dodecaedrModel);
 	private final Camera camera = new Camera(new Vector3f(0, 0, 1), new Vector3f(0, 0, 0));
 	private DirectionalLight directionalLight;
@@ -83,6 +90,7 @@ public class Main implements Runnable {
 
 		airplaneModel.setMaterial(new Material(airplaneModel.getTexture(), 1f));
 		barnModel.setMaterial(new Material(barnModel.getTexture(), 1f));
+		platzModel.setMaterial(new Material(platzModel.getTexture(), 1f));
 		houseModel.setMaterial(new Material(houseModel.getTexture(), 1f));
 		skyBoxModel.setMaterial(new Material(skyBoxModel.getTexture(), 1f));
 		dodecaedrModel.setMaterial(new Material(dodecaedrModel.getTexture(), 1f));
@@ -92,6 +100,7 @@ public class Main implements Runnable {
 //		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		airplaneModel.create();
 		barnModel.create();
+		platzModel.create();
 		houseModel.create();
         skyBoxModel.create();
 		dodecaedrModel.create();
@@ -132,13 +141,20 @@ public class Main implements Runnable {
 	    float speed = 0.02f;
 		window.update();
 		camera.update();
-		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) airplane.getPosition().x += 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) airplane.getPosition().x -= 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) airplane.getPosition().y += 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) airplane.getPosition().y -= 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) airplane.getPosition().z -= 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) airplane.getPosition().z += 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) airplane.getPosition().x += 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) airplane.getPosition().x -= 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) airplane.getPosition().y += 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) airplane.getPosition().y -= 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) airplane.getPosition().z -= 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) airplane.getPosition().z += 0.4f;
 
+
+		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) barn.getPosition().x += 0.4f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) barn.getPosition().x -= 0.4f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) barn.getPosition().y += 0.4f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) barn.getPosition().y -= 0.4f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) barn.getPosition().z -= 0.4f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) barn.getPosition().z += 0.4f;
 
 //		if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) System.out.println("X: " + Input.getScrollX() + ", Y: " + Input.getScrollY());
 
@@ -169,6 +185,7 @@ public class Main implements Runnable {
 	private void render() {
 		renderer.renderMesh(airplane, camera, directionalLight, ambientLight, fog);
 		renderer.renderMesh(barn, camera, directionalLight, ambientLight, fog);
+		renderer.renderMesh(platz, camera, directionalLight, ambientLight, fog);
 		renderer.renderMesh(house, camera, directionalLight, ambientLight, fog);
 		renderer.renderMesh(dodecaedr, camera, directionalLight, ambientLight, fog);
 		renderer.renderSkyBox(skyBox, camera);
@@ -179,6 +196,7 @@ public class Main implements Runnable {
 		window.destroy();
 		airplaneModel.destroy();
 		barnModel.destroy();
+		platzModel.destroy();
 		houseModel.destroy();
         skyBoxModel.destroy();
 		dodecaedrModel.destroy();
