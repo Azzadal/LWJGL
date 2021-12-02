@@ -1,11 +1,13 @@
 package engine.graphics;
 
+import engine.io.Input;
 import engine.io.Window;
 import engine.objects.Camera;
 import engine.objects.GameObject;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+import org.lwjgl.glfw.GLFW;
 
 import static org.lwjgl.opengl.GL46C.*;
 
@@ -14,14 +16,16 @@ public class Renderer {
 	private final Shader shaderSkybox;
 	private final Window window;
 	private final PointLight pointLight;
+    private Vector3f lightColour;
 
 	public Renderer(Window window, Shader shader, Shader shaderSkybox) {
 		this.window = window;
 		this.shader = shader;
 		this.shaderSkybox = shaderSkybox;
-		Vector3f lightColour = new Vector3f(1, 1, 1);
-		Vector3f lightPosition = new Vector3f(0, 0, 1);
-		float lightIntensity = 1.0f;
+		lightColour = new Vector3f(15.5f, 46.5f, 65f);
+		Vector3f lightPosition = new Vector3f(-110f, -134.3f, 54.5f);
+
+		float lightIntensity = 50.0f;
 		pointLight = new PointLight(lightColour, lightPosition, lightIntensity);
 		PointLight.Attenuation att = new PointLight.Attenuation(0.0f, 0.0f, 1.0f);
 		pointLight.setAttenuation(att);
@@ -64,9 +68,17 @@ public class Renderer {
 		glDisableVertexAttribArray(2);
 		glDisableVertexAttribArray(3);
 		glBindVertexArray(0);
-//        System.out.println("Камера x " + camera.getPosition().x);
-//        System.out.println("Камера y " + camera.getPosition().y);
-//        System.out.println("Камера z " + camera.getPosition().z);
+
+        /**
+         * Можно настроить цвет точечного источника света в доме
+         * при помощи кнопок прямо на сцене и вывести результат в консоль
+         */
+		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) lightColour.x += 0.1f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) lightColour.x -= 0.1f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) lightColour.y += 0.1f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) lightColour.y -= 0.1f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) lightColour.z += 0.1f;
+		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) lightColour.z -= 0.1f;
 	}
 
 	public void renderSkyBox(GameObject gameObject, Camera camera){

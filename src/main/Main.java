@@ -29,38 +29,38 @@ public class Main implements Runnable {
 	private final Mesh skyBoxModel = ModelLoader.loadModel("resources/models/skybox/untitled.obj",
 			"resources/models/skybox/3.png");
 	private final Mesh dodecaedrModel = ModelLoader.loadModel("resources/models/dodecaedr/dod.obj",
-			"resources/models/dodecaedr/5.jpg");
+			"resources/models/dodecaedr/9.jpg");
 	private final GameObject airplane = new GameObject(
-			new Vector3f(-97f, -460f, -3.3f),
+			new Vector3f(-185f, -412f, 42f),
 			new Vector3f(0, 0, 0),
 			new Vector3f(0.1f, 0.1f, 0.1f),
 			airplaneModel);
 	private final GameObject barn = new GameObject(
-			new Vector3f(-70f, 50.5f, 35f),
-			new Vector3f(1.54f, -0.08f, 0),
+			new Vector3f(-70f, 70.5f, 34.5f),
+			new Vector3f(1.54f, -0.1f, 0),
 			new Vector3f(3f, 3f, 3f),
 			barnModel);
     private final GameObject platz = new GameObject(
             new Vector3f(-110.6f, -100.5f, 15f),
-            new Vector3f(1.54f, -0.08f, 0),
-            new Vector3f(1f, .1f, .9f),
+            new Vector3f(1.54f, 0f, 0),
+            new Vector3f(1.08f, .1f, 1.1f),
             platzModel);
 	private final GameObject house = new GameObject(
-			new Vector3f(-60f, -64.2f, 34.55f),
-			new Vector3f(1.57f, 0, 0),
+			new Vector3f(-70f, -64.2f, 34.55f),
+			new Vector3f(1.57f, -0.04f, 0),
 			new Vector3f(0.1f, 0.1f, 0.1f),
 			houseModel);
 	private final GameObject skyBox = new GameObject(
 			new Vector3f(0, 0, 0),
 			new Vector3f(0,0,0),
-			new Vector3f(1000f, 1000f, 1000f),
+			new Vector3f(900f, 900f, 900f),
 			skyBoxModel);
 	private final GameObject dodecaedr = new GameObject(
-			new Vector3f(50, 50, 4),
+			new Vector3f(-125, 100f, 30.3f),
 			new Vector3f(0,0,0),
-			new Vector3f(4f, 4f, 4f),
+			new Vector3f(8f, 8f, 8f),
 			dodecaedrModel);
-	private final Camera camera = new Camera(new Vector3f(0, 0, 1), new Vector3f(0, 0, 0));
+	private final Camera camera = new Camera(new Vector3f(-158f, 0, 545f), new Vector3f(-1.35f, -15.27f, 0));
 	private DirectionalLight directionalLight;
 	private Fog fog;
 
@@ -95,9 +95,6 @@ public class Main implements Runnable {
 		skyBoxModel.setMaterial(new Material(skyBoxModel.getTexture(), 1f));
 		dodecaedrModel.setMaterial(new Material(dodecaedrModel.getTexture(), 1f));
 
-//		glEnable(GL_BLEND);
-
-//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		airplaneModel.create();
 		barnModel.create();
 		platzModel.create();
@@ -137,46 +134,65 @@ public class Main implements Runnable {
 		close();
 	}
 
+	private Vector3f startPosition = new Vector3f(-125, 100f, 30.2f);
+    private boolean flag = true;
+    private boolean flag1 = true;
+    private boolean start = false;
 	private void update() {
-	    float speed = 0.02f;
+	    float speed = 4f;
 		window.update();
 		camera.update();
-//		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) airplane.getPosition().x += 0.4f;
-//		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) airplane.getPosition().x -= 0.4f;
-//		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) airplane.getPosition().y += 0.4f;
-//		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) airplane.getPosition().y -= 0.4f;
-//		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) airplane.getPosition().z -= 0.4f;
-//		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) airplane.getPosition().z += 0.4f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) airplane.getRotation().x += 0.1f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) airplane.getRotation().x -= 0.1f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) airplane.getRotation().y += 0.1f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) airplane.getRotation().y -= 0.1f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) airplane.getRotation().z -= 0.01f;
+//		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) airplane.getRotation().z += 0.01f;
 
+//        System.out.println(camera.getRotation().x + " " + camera.getRotation().y + " " + camera.getRotation().z);
+		/**
+		 * Движение додекаедра
+		 */
+        if (dodecaedr.getPosition().y > -337f && flag1) {
+            dodecaedr.getPosition().y -= 0.2f * speed;
+            dodecaedr.getRotation().z -= 0.01f;
+            dodecaedr.getScale().x -= 0.001f;
+            dodecaedr.getScale().z -= 0.001f;
+        }
+        else flag1 = false;
+        if (dodecaedr.getPosition().y < 100f && !flag1) {
+            dodecaedr.getPosition().y += 0.2f * speed;
+            dodecaedr.getRotation().z += 0.01f;
+            dodecaedr.getScale().x += 0.001f;
+            dodecaedr.getScale().z += 0.001f;
+        }
+        else flag1 = true;
+        if (dodecaedr.getPosition().z < 150f && flag) {
+            dodecaedr.getPosition().z += 0.4f;
 
-		if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT)) barn.getPosition().x += 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_RIGHT)) barn.getPosition().x -= 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_UP)) barn.getPosition().y += 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_DOWN)) barn.getPosition().y -= 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_V)) barn.getPosition().z -= 0.4f;
-		if (Input.isKeyDown(GLFW.GLFW_KEY_B)) barn.getPosition().z += 0.4f;
+        } else flag = false;
+        if (dodecaedr.getPosition().z >= startPosition.z && !flag) {
+            dodecaedr.getPosition().z -= 0.4f;
+        } else flag = true;
 
-//		if (Input.isButtonDown(GLFW.GLFW_MOUSE_BUTTON_LEFT)) System.out.println("X: " + Input.getScrollX() + ", Y: " + Input.getScrollY());
+        /**
+         * Движение самолёта
+         */
+        if (Input.isKeyDown(GLFW.GLFW_KEY_P)) start = true;
+        if (start) {
+            airplane.getPosition().y += 1f;
+            airplane.getPosition().z += 0.05f;
+            airplane.getRotation().x += 0.0009f;
+            airplane.getRotation().y += 0.0001f;
+            airplane.getRotation().z -= 0.0005f;
+        }
 
-		// Update directional light direction, intensity and colour
 		float lightAngle = -85;
-//		if (lightAngle > 90) {
-//			directionalLight.setIntensity(0);
-//			if (lightAngle >= 360) {
-//				lightAngle = -90;
-//			}
-//		} else {
-			float factor = 1 - (float) (Math.abs(lightAngle) - 80) / 10.0f;
-			directionalLight.setIntensity(factor);
-			directionalLight.getColor().y = Math.max(factor, 0.9f);
-			directionalLight.getColor().z = Math.max(factor, 0.5f);
+		float factor = 1 - (float) (Math.abs(lightAngle) - 80) / 10.0f;
+		directionalLight.setIntensity(factor);
+		directionalLight.getColor().y = Math.max(factor, 0.9f);
+		directionalLight.getColor().z = Math.max(factor, 0.5f);
 
-//		} else {
-//			directionalLight.setIntensity(1);
-//			directionalLight.getColor().x = 1;
-//			directionalLight.getColor().y = 1;
-//			directionalLight.getColor().z = 1;
-//		}
 		double angRad = Math.toRadians(lightAngle);
 		directionalLight.getDirection().x = (float) Math.sin(angRad);
 		directionalLight.getDirection().y = (float) Math.cos(angRad);
