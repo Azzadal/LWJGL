@@ -1,4 +1,4 @@
-package engine.graphics;
+package main.java.engine.graphics;
 
 import org.lwjgl.system.MemoryUtil;
 import java.nio.FloatBuffer;
@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL46C.*;
 public class Mesh {
 	private final Vertex[] vertices;
 	private final int[] indices;
-	private final Texture texture;
+	private final main.java.engine.graphics.Texture texture;
 	private int vao, pbo, ibo, cbo, tbo, vnbo;
 	private Material material;
 

@@ -1,6 +1,6 @@
-package engine.objects;
+package main.java.engine.objects;
 
-import engine.graphics.Mesh;
+import main.java.engine.graphics.Mesh;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;

@@ -1,6 +1,8 @@
-package engine.utils;
+package main.java.engine.utils;
 
-import org.lwjglx.BufferUtils;
+
+
+import org.lwjgl.BufferUtils;
 
 import java.io.*;
 import java.nio.ByteBuffer;

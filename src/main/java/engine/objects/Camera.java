@@ -1,7 +1,6 @@
-package engine.objects;
+package main.java.engine.objects;
 
-import engine.graphics.PointLight;
-import engine.io.Input;
+import main.java.engine.io.Input;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;

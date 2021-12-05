@@ -1,8 +1,8 @@
-package engine.graphics;
+package main.java.engine.graphics;
 
 
-//import engine.maths.Vector2f;
-//import engine.maths.Vector3f;
+//import main.java.engine.maths.Vector2f;
+//import main.java.engine.maths.Vector3f;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
