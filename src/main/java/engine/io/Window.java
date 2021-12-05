@@ -1,4 +1,4 @@
-package engine.io;
+package main.java.engine.io;
 
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -7,13 +7,9 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
-import engine.maths.Vector3f;
+import main.java.engine.maths.Vector3f;
 
-import static com.jogamp.opengl.GL.GL_LINEAR;
-import static com.jogamp.opengl.GL2ES1.*;
 import static org.lwjgl.opengl.GL11.glFogfv;
-import static org.lwjgl.opengl.GL11.glFogi;
-import static org.lwjgl.opengl.GL11C.*;
 
 public class Window {
 	private int width, height;

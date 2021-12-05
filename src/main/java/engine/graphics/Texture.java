@@ -1,10 +1,10 @@
-package engine.graphics;
+package main.java.engine.graphics;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import static engine.utils.FileUtils.*;
+import static main.java.engine.utils.FileUtils.*;
 
 import org.lwjgl.BufferUtils;
 import static org.lwjgl.opengl.GL46C.*;

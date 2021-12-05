@@ -1,8 +1,8 @@
-package engine.graphics;
+package main.java.engine.graphics;
 
 import static org.lwjgl.opengl.GL46C.*;
 
-import engine.utils.FileUtils;
+import main.java.engine.utils.FileUtils;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;

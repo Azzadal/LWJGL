@@ -1,9 +1,9 @@
-package engine.graphics;
+package main.java.engine.graphics;
 
-import engine.io.Input;
-import engine.io.Window;
-import engine.objects.Camera;
-import engine.objects.GameObject;
+import main.java.engine.io.Input;
+import main.java.engine.io.Window;
+import main.java.engine.objects.Camera;
+import main.java.engine.objects.GameObject;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;

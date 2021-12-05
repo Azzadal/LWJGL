@@ -1,13 +1,17 @@
-package main;
+package main.java;
 
-import engine.graphics.*;
-import engine.io.Input;
-import engine.io.ModelLoader;
-import engine.io.Window;
-import engine.objects.Camera;
-import engine.objects.GameObject;
+import main.java.engine.graphics.*;
+import main.java.engine.io.Input;
+import main.java.engine.io.ModelLoader;
+import main.java.engine.io.Window;
+import main.java.engine.objects.Camera;
+import main.java.engine.objects.GameObject;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
+
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main implements Runnable {
 	private Window window;
@@ -15,21 +19,22 @@ public class Main implements Runnable {
 	private Shader shader;
 	private Shader shaderSkybox;
 	private Vector3f ambientLight;
+	Path ttt = t();
 	private final Mesh airplaneModel = ModelLoader.loadModel(
-			"resources/models/6/airplane_v2_L2.123c71795678-4b63-46c4-b2c6-549c45f4c806/my.obj",
-			"resources/models/6/airplane_v2_L2.123c71795678-4b63-46c4-b2c6-549c45f4c806/" +
+			"src/main/resources/models/6/airplane_v2_L2.123c71795678-4b63-46c4-b2c6-549c45f4c806/my.obj",
+			"src/main/resources/models/6/airplane_v2_L2.123c71795678-4b63-46c4-b2c6-549c45f4c806/" +
 					"airplane_body_diffuse_v1_my.jpg");
 	private final Mesh barnModel = ModelLoader.loadModel(
-            "resources/models/saray/my/saray.obj", "resources/models/saray/my/cottage_diffuse.png");
+            new File("src/main/resources/models/saray/my/saray.obj").getAbsolutePath(), new File("src/main/resources/models/saray/my/cottage_diffuse.png").getAbsolutePath());
     private final Mesh platzModel = ModelLoader.loadModel(
-            "resources/models/1/94-format/Container.obj", "resources/models/1/44-container_textures/textures_container/Container_DiffuseMap.jpg");
+			new File("src/main/resources/models/1/94-format/Container.obj").getAbsolutePath(), new File("src/main/resources/models/1/44-container_textures/textures_container/Container_DiffuseMap.jpg").getAbsolutePath());
 	private final Mesh houseModel = ModelLoader.loadModel(
-			"resources/models/2/45-cottage_free_other/Cottage_FREE.3DS",
-			"resources/models/2/82-textures_cottage_dirt/Cottage_Dirt/Cottage_Dirt_Base_Color.png");
-	private final Mesh skyBoxModel = ModelLoader.loadModel("resources/models/skybox/untitled.obj",
-			"resources/models/skybox/3.png");
-	private final Mesh dodecaedrModel = ModelLoader.loadModel("resources/models/dodecaedr/dod.obj",
-			"resources/models/dodecaedr/9.jpg");
+			new File("src/main/resources/models/2/45-cottage_free_other/Cottage_FREE.3DS").getAbsolutePath(),
+			new File("src/main/resources/models/2/82-textures_cottage_dirt/Cottage_Dirt/Cottage_Dirt_Base_Color.png").getAbsolutePath());
+	private final Mesh skyBoxModel = ModelLoader.loadModel(new File("src/main/resources/models/skybox/untitled.obj").getAbsolutePath(),
+			new File("src/main/resources/models/skybox/3.png").getAbsolutePath());
+	private final Mesh dodecaedrModel = ModelLoader.loadModel(new File("src/main/resources/models/dodecaedr/dod.obj").getAbsolutePath(),
+			new File("src/main/resources/models/dodecaedr/9.jpg").getAbsolutePath());
 	private final GameObject airplane = new GameObject(
 			new Vector3f(-185f, -412f, 42f),
 			new Vector3f(0, 0, 0),
@@ -63,6 +68,15 @@ public class Main implements Runnable {
 	private final Camera camera = new Camera(new Vector3f(-158f, 0, 545f), new Vector3f(-1.35f, -15.27f, 0));
 	private DirectionalLight directionalLight;
 	private Fog fog;
+
+	Path t() {
+		Path p1 = Paths.get("C:\\Git\\LWJGL\\src\\main\\java\\engine\\io\\ModelLoader.java");
+		Path p2 = Paths.get("C:\\Git\\LWJGL\\src\\main\\resources\\models\\6\\airplane_v2_L2.123c71795678-4b63-46c4-b2c6-549c45f4c806\\my.obj");
+		System.out.println(p1.relativize(p2));
+
+		System.out.println("путь " + new File("src/main/resources/models/6").getAbsolutePath());
+		return p2;
+	}
 
 	private void start() {
 		Thread game = new Thread(this, "game");

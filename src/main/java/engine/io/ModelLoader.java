@@ -1,17 +1,13 @@
-package engine.io;
+package main.java.engine.io;
 
-import engine.graphics.Texture;
-import engine.graphics.Mesh;
-import engine.graphics.Vertex;
-//import engine.maths.Vector2f;
-//import engine.maths.Vector3f;
+import main.java.engine.graphics.Texture;
+import main.java.engine.graphics.Mesh;
+import main.java.engine.graphics.Vertex;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.assimp.*;
 
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class ModelLoader {
