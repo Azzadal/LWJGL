@@ -1,4 +1,4 @@
-package engine.utils;
+package main.java.engine.utils;
 
 import org.lwjglx.BufferUtils;
 
